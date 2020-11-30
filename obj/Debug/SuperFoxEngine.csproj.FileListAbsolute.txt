@@ -1,0 +1,7 @@
+C:\Users\matsu\Documents\SuperFoxEngine\SuperFoxEngine\obj\Debug\SuperFoxEngine.csprojAssemblyReference.cache
+C:\Users\matsu\Documents\SuperFoxEngine\SuperFoxEngine\obj\Debug\SuperFoxEngine.csproj.CoreCompileInputs.cache
+C:\Users\matsu\Documents\SuperFoxEngine\SuperFoxEngine\bin\Debug\SuperFoxEngine.exe.config
+C:\Users\matsu\Documents\SuperFoxEngine\SuperFoxEngine\bin\Debug\SuperFoxEngine.exe
+C:\Users\matsu\Documents\SuperFoxEngine\SuperFoxEngine\bin\Debug\SuperFoxEngine.pdb
+C:\Users\matsu\Documents\SuperFoxEngine\SuperFoxEngine\obj\Debug\SuperFoxEngine.exe
+C:\Users\matsu\Documents\SuperFoxEngine\SuperFoxEngine\obj\Debug\SuperFoxEngine.pdb
