@@ -8,12 +8,37 @@ using System.Threading.Tasks;
 
 namespace SuperFoxEngine.Engine
 {
+	//Allows the usage of Sprites and Images.
 	public class Sprite2D
 	{
-		public Vector2 position;
-		public Vector2 scale;
-		[Range(0, 360)] public int rotation = 0;
-		public string tag = "";
-		public string directory = "";
+		//Variables
+		public Vector2 Position;
+		public Vector2 Scale;
+		[Range(0, 360)] public int Rotation = 0;
+		public string Tag = "";
+		public string Directory = "";
+		public Bitmap Sprite = null;
+
+		//Constructor
+		public Sprite2D(Vector2 _Position, Vector2 _Scale, int _Rotation, string _Tag, string _Directory)
+		{
+			this.Position = _Position;
+			this.Scale = _Scale;
+			this.Rotation = _Rotation;
+			this.Tag = _Tag;
+			this.Directory = _Directory;
+
+			//Set the image from a directory
+			Image temp = Image.FromFile($"Assets/Sprites/{_Directory}.png");
+			Bitmap sprite = new Bitmap(temp, new Size(temp.Width, temp.Height));
+			this.Sprite = sprite;
+
+			SuperFoxEngine.RegisterSprite(this);
+		}
+
+		public void DestroySelf()
+		{
+			SuperFoxEngine.UnRegisterSprite(this);
+		}
 	}
 }

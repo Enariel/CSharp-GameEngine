@@ -18,10 +18,13 @@ namespace SuperFoxEngine.Engine
 		private string Title;
 		private Canvas GameWindow = null;
 		private Thread GameLoopThread = null;
-
 		private static List<Shape2D> RegisteredShapes = new List<Shape2D>();
 		private static List<Sprite2D> RegisteredSprites = new List<Sprite2D>();
+
 		public Color BackgroundColor = Color.Black;
+
+		internal Canvas GameWindow1 { get => GameWindow; set => GameWindow = value; }
+
 		public SuperFoxEngine(Vector2 _ScreenSize, string _Title)
 		{
 			this.ScreenSize = _ScreenSize;
@@ -66,19 +69,20 @@ namespace SuperFoxEngine.Engine
 		public static void RegisterSprite(Sprite2D _Sprite)
 		{
 			RegisteredSprites.Add(_Sprite);
-			Log.Information($"[SPRITE2D] - {_Sprite.tag} is registered!");
+			Log.Information($"[SPRITE2D] - {_Sprite.Tag} is registered!");
 		}
 
 		public static void UnRegisterSprite(Sprite2D _Sprite)
 		{
 			RegisteredSprites.Remove(_Sprite);
-			Log.Warning($"[SPRITE2D] - {_Sprite.tag} is unregistered.");
+			Log.Warning($"[SPRITE2D] - {_Sprite.Tag} is unregistered.");
 		}
 
 		//The loop that runs the game time and refreshes the windows
 		void GameLoop()
 		{
 			OnLoad();
+			OnStart();
 			while (GameLoopThread.IsAlive)
 			{
 				try
@@ -96,8 +100,12 @@ namespace SuperFoxEngine.Engine
 				catch
 				{
 					Log.Error("Game Window not found...");
+					OnUnload();
 				}
+				//If quit, return out or break;
 			}
+			//Execute OnUnLoad
+			OnUnload();
 		}
 
 		//The drawing for the game window
@@ -114,22 +122,20 @@ namespace SuperFoxEngine.Engine
 			}
 			foreach (Sprite2D sprite in RegisteredSprites)
 			{
-
+				g.DrawImage(sprite.Sprite, sprite.Position.x, sprite.Position.y, sprite.Scale.x, sprite.Scale.x);
 			}
 		}
 
 		//Onload is for loading things before an application starts, such as sprites, sounds, etc.
 		public abstract void OnLoad();
-
+		//Renders objects to draw to window.
+		public abstract void OnStart();
+		//Like Unity's Update() method, called once every 'frame'.
+		public abstract void OnDraw();
+		//Like Unity's Start() method. Called once an object is loaded in a window.
+		public abstract void OnUpdate();
 		//Unload function to dictate the unloading of assets when the game is stopped or ended.
 		public abstract void OnUnload();
-		//Renders objects to draw to window.
-		public abstract void OnDraw();
 
-		//Like Unity's Start() method. Called once an object is loaded in a window.
-		public abstract void OnStart();
-
-		//Like Unity's Update() method, called once every 'frame'.
-		public abstract void OnUpdate();
 	}
 }

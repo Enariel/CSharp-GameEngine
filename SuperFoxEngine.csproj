@@ -42,7 +42,7 @@
     <Reference Include="System.Windows.Forms" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Dust_Toy\Dust_Toy.cs" />
+    <Compile Include="DungeonCrawler\DungeonCrawler.cs" />
     <Compile Include="Engine\Canvas.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -54,8 +54,9 @@
     <Compile Include="Program.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Dust_Toy\Particles\" />
-    <Folder Include="Dust_Toy\Sprites\" />
+    <EmbeddedResource Include="Engine\Canvas.resx">
+      <DependentUpon>Canvas.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
